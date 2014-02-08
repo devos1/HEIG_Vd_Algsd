@@ -22,10 +22,6 @@
 
 //Prototypes de fonctions
 int saisieEntier();
-
-// Insérer un élément directement dans l'ordre croissant
-// Rend VRAI si insertion  OK, FAUX sinon
-int insereEltOrdreC (typeElt **ptPrem, typeDonnee val);
     
 // Enleve un element de la liste
 // Resultat VRAI si l'element est dans la liste et FAUX sinon
@@ -161,38 +157,5 @@ void detruireListe (typeElt **premier){
     }
 }
 
-// Insérer un élément directement dans l'ordre croissant
-// Rend VRAI si insertion  OK, FAUX sinon
-int insereEltOrdreC (typeElt **ptPrem, typeDonnee val){
-    
-    typeElt *precedent, *courant, *nouveau;
-    int retour = FAUX;
-    int trouve = FAUX;
-    
-    courant = *ptPrem;      //Se placer en tête de liste
-    precedent = NULL;
-    
-    while (courant != NULL && !trouve) {
-        if (val <= valElt(courant)) {
-            trouve = VRAI;
-        }else{
-            precedent = courant;                    //On mémorise le courant
-            courant = suivantElt(courant);          //On passe au suivant
-        }
-        
-    }
-    
-    // A la fin de la boucle precedent pointe sur l'élément derrière lequel
-	// on doit insèrer un nouvel élément ou est Ègal à NULL si on insère
-	// en début de liste
-    nouveau = creerElt(val);
-    
-    if (nouveau != NULL) {
-        insereElt(ptPrem, precedent, nouveau);  //Le courant est precedent car on veut insère avan le vrai courant
-        retour = VRAI;                          //étant donné qu'on veut insèrer dans l'ordre croissant!!
-    }
-    
-    return retour;
-}
 
 

@@ -37,6 +37,10 @@ typeElt *suivantElt (typeElt *element);
 // courant sera Ègal à NULL si on veut insérer en début de liste
 void insereElt (typeElt **ptPrem, typeElt *courant, typeElt *nouveau);
 
+// Insérer un élément directement dans l'ordre croissant
+// Rend VRAI si insertion  OK, FAUX sinon
+int insereEltOrdreC (typeElt **ptPrem, typeDonnee val);
+
 // Détruire l'élément placé derrière l'élément courant
 // ptPrem est l'adresse du pointeur sur le premier de la liste
 // courant vaut NULL s'il faut enlever le premier

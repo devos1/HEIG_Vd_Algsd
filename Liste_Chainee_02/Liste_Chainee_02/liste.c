@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include "liste.h"
 
+#define VRAI 1
+#define FAUX 0
+
 // Initialise la liste : pas d'éléments
 void initListe (typeElt **ptPrem) {
 	*ptPrem = NULL;
@@ -54,6 +57,41 @@ void insereElt (typeElt **ptPrem, typeElt *courant, typeElt *nouveau) {
 		courant->suivant = nouveau;
 	}
 }
+
+// Insérer un élément directement dans l'ordre croissant
+// Rend VRAI si insertion  OK, FAUX sinon
+int insereEltOrdreC (typeElt **ptPrem, typeDonnee val){
+    
+    typeElt *precedent, *courant, *nouveau;
+    int retour = FAUX;
+    int trouve = FAUX;
+    
+    courant = *ptPrem;      //Se placer en tête de liste
+    precedent = NULL;
+    
+    while (courant != NULL && !trouve) {
+        if (val <= valElt(courant)) {
+            trouve = VRAI;
+        }else{
+            precedent = courant;                    //On mémorise le courant
+            courant = suivantElt(courant);          //On passe au suivant
+        }
+        
+    }
+    
+    // A la fin de la boucle precedent pointe sur l'élément derrière lequel
+	// on doit insèrer un nouvel élément ou est Ègal à NULL si on insère
+	// en début de liste
+    nouveau = creerElt(val);
+    
+    if (nouveau != NULL) {
+        insereElt(ptPrem, precedent, nouveau);  //Le courant est precedent car on veut insère avan le vrai courant
+        retour = VRAI;                          //étant donné qu'on veut insèrer dans l'ordre croissant!!
+    }
+    
+    return retour;
+}
+
 
 // Détruire l'élément placé derrière l'élément courant
 // ptPrem est l'adresse du pointeur sur le premier de la liste
