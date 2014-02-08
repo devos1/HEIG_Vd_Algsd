@@ -23,6 +23,10 @@
 //Prototypes de fonctions
 int saisieEntier();
 
+// Insérer un élément directement dans l'ordre croissant
+// Rend VRAI si insertion  OK, FAUX sinon
+int insereEltOrdreC (typeElt **ptPrem, typeDonnee val);
+    
 // Enleve un element de la liste
 // Resultat VRAI si l'element est dans la liste et FAUX sinon
 int enlever (typeElt **ptPrem, int val);
@@ -37,16 +41,13 @@ void detruireListe (typeElt **premier);
  ------------------------MAIN-------------------------------
  ***********************************************************/
 
-int main(int argc, const char * argv[])
+int main()
 {
-
     int choix;
     typeDonnee val;
-    typeElt *premier, *nouveau, *courant;   //Correspond à l'emplacement de la liste
+    typeElt *premier;                       //Correspond à l'emplacement de la liste
     
     initListe(&premier);                    //Initialisation de la liste
-    nouveau = NULL;                         //Init du nouvel élément
-    courant = NULL;                         //Init de l'élément courant
     
     
     printf("Exercice: Liste chainee 01\n");
@@ -61,12 +62,8 @@ int main(int argc, const char * argv[])
                 printf("Insertion valeur \n");
                 printf("Entrer valeur: ");
                 val = saisieEntier();
-                nouveau = creerElt(val);
-                if (nouveau == NULL) {
-                    printf("Impossible d'inserer un element: plus de memoire");
-                }else{
-                    insereElt(&premier, courant , nouveau);
-                    courant = nouveau;
+                if (!(insereEltOrdreC(&premier, val))) {
+                    puts("Impossible d'inserer la valeur");
                 }
                 break;
             case 2:
@@ -163,3 +160,39 @@ void detruireListe (typeElt **premier){
         detruireElt(premier, NULL);         //Suppression à chaque fois du premier de la liste
     }
 }
+
+// Insérer un élément directement dans l'ordre croissant
+// Rend VRAI si insertion  OK, FAUX sinon
+int insereEltOrdreC (typeElt **ptPrem, typeDonnee val){
+    
+    typeElt *precedent, *courant, *nouveau;
+    int retour = FAUX;
+    int trouve = FAUX;
+    
+    courant = *ptPrem;      //Se placer en tête de liste
+    precedent = NULL;
+    
+    while (courant != NULL && !trouve) {
+        if (val <= valElt(courant)) {
+            trouve = VRAI;
+        }else{
+            precedent = courant;                    //On mémorise le courant
+            courant = suivantElt(courant);          //On passe au suivant
+        }
+        
+    }
+    
+    // A la fin de la boucle precedent pointe sur l'élément derrière lequel
+	// on doit insèrer un nouvel élément ou est Ègal à NULL si on insère
+	// en début de liste
+    nouveau = creerElt(val);
+    
+    if (nouveau != NULL) {
+        insereElt(ptPrem, precedent, nouveau);  //Le courant est precedent car on veut insère avan le vrai courant
+        retour = VRAI;                          //étant donné qu'on veut insèrer dans l'ordre croissant!!
+    }
+    
+    return retour;
+}
+
+
