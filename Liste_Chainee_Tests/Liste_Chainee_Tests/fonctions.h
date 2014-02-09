@@ -71,6 +71,13 @@ int insereEltOrdreC (typeElement **premier, typeDonnee val);
 //      Retourne un pointeur sur la nouvelle liste
 typeElement *iArrayTolist(const int tab[], int taille);
 
+//  12. Fusion de 2 listes en gardant l'ordre croissant
+//      RESULTAT: pointeur sur la nouvelle liste
+typeElement *fusionListe(typeElement *liste1, typeElement *liste2);
+
+//  13. Concaténation de 2 listes
+void concatListe(typeElement **liste1,typeElement *liste2);
+
 /***********************************************************
  FONCTIONS DIVERSES
  ***********************************************************/
@@ -86,4 +93,7 @@ void printMenuEx();
 
 //  23. Imprimer un tableau
 void printTableau(int tab[], int n);
+
+//  24. Retourne le MIN de 2 entier
+int iMin(int nb1, int nb2);
 

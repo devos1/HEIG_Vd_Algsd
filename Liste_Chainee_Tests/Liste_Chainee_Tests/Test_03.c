@@ -13,7 +13,7 @@
 /***********************************************************
  TEST 03:
     - Passer les valeurs de 2 tableaux à 2 listes différentes
-    -
+    - Fusionner les 2 listes dans une 3ème
  ***********************************************************/
 
 
@@ -26,11 +26,11 @@
 int main(){
     
     //Pointeur sur les nouvelles listes
-    typeElement *liste1 = NULL, *liste2 = NULL;
+    typeElement *liste1 = NULL, *liste2 = NULL, *liste3 = NULL;
     
     //Déclaration de 2 tableaux statiquex
-    int tab1[MAX_TAB] = {1, 2, 3, 4, 5, 6};
-    int tab2[MAX_TAB] = {10, 11, 12, 13, 14, 15};
+    int tab1[MAX_TAB] = {1, 3, 6, 10, 14, 15};
+    int tab2[MAX_TAB] = {2, 7, 8, 12, 16, 20};
     
     //Afficher tableau 1
     printf("Tableau 1: ");
@@ -40,11 +40,25 @@ int main(){
     printf("Tableau 2: ");
     printTableau(tab2, MAX_TAB);
     
-    //Passage du tableau vers liste 1
+    //Passage du tableau 2 vers liste 1
     liste1 = iArrayTolist(tab1, MAX_TAB);
     printf("Liste 1: ");
     printListeInt(liste1);
     
+    //Passage du tableau 2 vers liste 2
+    liste2 = iArrayTolist(tab2, MAX_TAB);
+    printf("Liste 2: ");
+    printListeInt(liste2);
+    
+    //Fusion des 2 listes dans une 3ème
+    liste3 = fusionListe(liste1, liste2);
+    printf("Liste fusionée: ");
+    printListeInt(liste3);
+    
+    //Listes concaténées
+    concatListe(&liste1, liste2);
+    printf("Liste concatenées: ");
+    printListeInt(liste1);
     
     return 0;
 }

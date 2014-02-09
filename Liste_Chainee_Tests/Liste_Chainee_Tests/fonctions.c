@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "fonctions.h"
 
+
 #define VRAI 1
 #define FAUX 0
 
@@ -194,6 +195,66 @@ typeElement *iArrayTolist(const int tab[], int taille){
     return premier;
 }
 
+//  12. Fusion de 2 listes en gardant l'ordre croissant
+//      RESULTAT: pointeur sur la nouvelle liste
+typeElement *fusionListe(typeElement *liste1, typeElement *liste2){
+    
+    typeElement *listeFusionee, *courant1, *courant2, *courant3, *nouveau;
+    typeDonnee val1, val2;
+    
+    //Initialiser la nouvelle liste
+    initListe(&listeFusionee);
+    
+    //Initialiser les pointeurs sour les curseurs
+    courant1 = liste1;
+    courant2 = liste2;
+    courant3 = NULL;
+    
+    while (courant1 != NULL && courant2 != NULL) {
+        val1 = lireValeurElement(courant1);
+        val2 = lireValeurElement(courant2);
+        nouveau = creerElement(iMin(val1, val2));                   //Création d'un nouvel élément en prennant le plus petite des 2 listes
+        insererElement(&listeFusionee, courant3, nouveau);
+        courant3 = nouveau;
+        
+        if (val1 < val2) {                                          //On fait avancer le curseur sur le nb le plus petit
+            courant1 = elementSuivant(courant1);
+        }else{
+            courant2 = elementSuivant(courant2);
+        }
+    }
+    
+    //Raccorder la fin de la dernière liste
+    if (courant2 != NULL) {                                         //Cette étape consiste dans le cas ou la liste 1 est plus petite que la 2 à
+        courant1 = courant2;                                        //Le pointeur de la 1 récupère le pointeur de la 2 et avance comme si c'était courant2
+    }                                                               //Si c'est la 2 qui est plus petite, rien besoin de faire, on passe directe à la suite
+    while (courant1 != NULL) {                                      //Et courant1 finit le parcours de sa liste
+        val1 = lireValeurElement(courant1);
+        nouveau = creerElement(val1);
+        insererElement(&listeFusionee, courant3, nouveau);
+        courant3 = nouveau;
+        courant1 = elementSuivant(courant1);
+    }
+    
+    return listeFusionee;
+}
+
+//  13. Concaténation de 2 listes (la liste 2 à la suite de la liste 1
+void concatListe(typeElement **liste1,typeElement *liste2){
+    
+    typeElement *courant;
+    
+    if (*liste1 == NULL) {                          //Si la liste 1 est vide, on pointe directement sur la 2ème
+        *liste1 = liste2;
+    }else{                                          //Si la liste n'est pas vide
+        courant = *liste1;
+        while (courant->suivant != NULL) {
+            courant = courant->suivant;             //On avance dans la liste jusqu'à trouver le dernier éléments
+        }
+        courant->suivant = liste2;                  //On attache la liste 2 à la liste1
+    }
+}
+
 /***********************************************************
  FONCTIONS DIVERSES
  ***********************************************************/
@@ -242,5 +303,15 @@ void printTableau(int tableau[], int n){
 		printf("%d ", tableau[i]);
 	}
 	puts("");
+}
+
+//  24. Retourne le MIN de 2 entier
+int iMin(int nb1, int nb2){
+    
+    if (nb1 < nb2) {
+        return  nb1;
+    }else{
+        return  nb2;
+    }
 }
 
