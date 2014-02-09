@@ -2,7 +2,7 @@
 //  main.c
 //  Liste_Chainee_Tests
 //
-//  Created by Oscar da Silva on 08.02.14.
+//  Created by Oscar on 08.02.14.
 //  Copyright (c) 2014 Oscar. All rights reserved.
 //
 //  Divers tests sur les listes chainnées
@@ -13,10 +13,10 @@
 //          - 3: Afficher liste
 //
 /***********************************************************
- EXERCICE 01:
-    - Travail sur une liste d'entier
-    - Insertion d'entiers
-    - Suppression d'entier
+ TEST 01:
+    - Travail sur une liste de caractères
+    - Insertion de caractères
+    - Suppression de caractères
     - Affichage de la liste
  ***********************************************************/
 
@@ -28,7 +28,7 @@
 #define FAUX 0
 
 
-int main()
+int main1()
 {
     int choix;
     typeDonnee valeur;
@@ -36,9 +36,6 @@ int main()
     typeElement *courant, *nouveau;
     
     courant = NULL; nouveau = NULL;
-    
-    printf("Cration d'une liste chainee vide:\n");
-    puts("-----------------------------------");
  
     //  Init liste
     initListe(&premier);
@@ -77,7 +74,7 @@ int main()
             case 3:
                 puts("AFFICHER LISTE:");
                 puts("---------------");
-                printListe(premier);
+                printListeChar(premier);
                 puts("---------------");
                 break;
             default:
@@ -88,6 +85,9 @@ int main()
         printMenu();
         choix = saisieEntier();
     }
+    
+    puts("Detruire la liste...\n");
+    detruireListe(&premier);
     
     return 0;
 }
