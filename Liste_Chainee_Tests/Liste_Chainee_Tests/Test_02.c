@@ -12,10 +12,12 @@
 //          - 2: Supprimer valeur
 //          - 3: Afficher liste
 //
+//  REMARQUE: Ne pas oublier de changer le typeDonne
+//
 /***********************************************************
  TEST 02:
     - Travail sur une liste d'entier
-    - Insertion d'entiers dans l'ordre de saisie
+    - Insertion d'entiers dans l'ordre croissant
     - Suppression d'entier
     - Affichage de la liste
  ***********************************************************/
@@ -28,7 +30,7 @@
 #define FAUX 0
 
 
-int main()
+int main2()
 {
     int choix;
     typeDonnee val;

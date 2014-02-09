@@ -166,11 +166,32 @@ int insereEltOrdreC (typeElement **premier, typeDonnee val){
     nouveau = creerElement(val);
     
     if (nouveau != NULL) {
-        insererElement(premier, courant, nouveau);      //Le courant est precedent car on veut insère avan le vrai courant
+        insererElement(premier, precedent, nouveau);      //Le courant est precedent car on veut insère avan le vrai courant
         retour = VRAI;                                  //étant donné qu'on veut insèrer dans l'ordre croissant!!
     }
     
     return retour;
+}
+
+//  11. Passer les valeurs d'un tableau d'entiers vers une nouvelle liste d'entiers
+//      Retourne un pointeur sur la nouvelle liste
+typeElement *iArrayTolist(const int tab[], int taille){
+    
+    typeElement *premier, *courant, *nouveau;
+    int i = 0;
+    
+    //Init nouvelle liste
+    initListe(&premier);
+    courant = NULL;
+    nouveau = NULL;
+    
+    for (i = 0; i < taille; i++) {
+        nouveau = creerElement(tab[i]);
+        insererElement(&premier, courant, nouveau);
+        courant = nouveau;
+    }
+    
+    return premier;
 }
 
 /***********************************************************
@@ -209,5 +230,17 @@ void printMenuEx(){
     puts("1: Exercice 1 - liste de caractères");
     puts("2: Exercice 2 - liste d'entiers isérés par ordre croissante");
     printf("Choix: ");
+}
+
+//  23. Imprimer un tableau
+void printTableau(int tableau[], int n){
+    
+	int i;
+    
+	for (i = 0; i < n; i++)
+	{
+		printf("%d ", tableau[i]);
+	}
+	puts("");
 }
 

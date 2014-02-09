@@ -12,6 +12,8 @@
 //          - 2: Supprimer valeur
 //          - 3: Afficher liste
 //
+//  REMARQUE: Ne pas oublier de changer le typeDonne
+//
 /***********************************************************
  TEST 01:
     - Travail sur une liste de caractères

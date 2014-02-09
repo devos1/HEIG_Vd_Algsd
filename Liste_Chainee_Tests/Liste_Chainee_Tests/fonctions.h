@@ -15,7 +15,7 @@
  ***********************************************************/
 
 //	Définition du type de données qu'il y aura dans la pile
-typedef char typeDonnee;					// Dans ce cas un CHAR
+typedef int typeDonnee;					// Dans ce cas un CHAR
 
 // Structure pour répresenter un élément de la liste
 typedef struct element{
@@ -67,6 +67,10 @@ void detruireListe(typeElement **premier);
 //      Rend VRAI si insertion  OK, FAUX sinon
 int insereEltOrdreC (typeElement **premier, typeDonnee val);
 
+//  11. Passer les valeurs d'un tableau d'entiers vers une nouvelle liste d'entiers
+//      Retourne un pointeur sur la nouvelle liste
+typeElement *iArrayTolist(const int tab[], int taille);
+
 /***********************************************************
  FONCTIONS DIVERSES
  ***********************************************************/
@@ -80,4 +84,6 @@ void printMenu();
 //  22. Afficher menu exercices
 void printMenuEx();
 
+//  23. Imprimer un tableau
+void printTableau(int tab[], int n);
 
