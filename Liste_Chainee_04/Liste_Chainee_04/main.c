@@ -8,13 +8,12 @@
 
 /*
  * Pile exercice 1
- * Utilisation d'une pile pour empiler des valeurs entiËres
+ * Utilisation d'une pile pour empiler des valeurs entières
  * et pour les restituer dans l'ordre inverse
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "pile.h"
 
 #define LGL 80   /* Taille d'une ligne de caractËres */
