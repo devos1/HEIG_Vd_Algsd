@@ -3,31 +3,48 @@
 /* Impression de l'arbre sous forme infixÈe et prÈfixÈe */
 /* Evaluation de l'expression ‡ partir de sa reprÈsentations */
 /* sous forme d'arbre binaire */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
 #include "arbre.h"
 #include "pile.h"
 
 #define TAILLEMAX 80   /* Taille d'une ligne de caractËres */
 #define TAILLEPILE 50  /* Taille max d'une pile */
 
-void main () {
+int main (void) {
+    
 	/* Declaration d'un objet pile */
 	typePile *pile;
+    
+    // VARIABLES STD
 	char expr [TAILLEMAX];
 	int val;
 	char *ptexpr;
+    
+    // VARIABLES DE L'ARBRE
 	typeNoeud *feuille, *noeud, *droit, *gauche;
 	typeNoeud *racine; // Pointe sur la racine de l'arbre
     
-	pile = initpile (TAILLEPILE); /* Initialiser la pile */
+    // INIT PILE
+	pile = initpile (TAILLEPILE);
+    
+    // POINTEUR SUR L'EXPRESSION ENTREE
 	ptexpr = expr;
+    
+    // DEMANDE EXPRESSION A L'UTILISATEUR
 	printf ("Entrer une expression postfixee\n");
 	fgets (expr, TAILLEMAX, stdin);
     
-	while (*ptexpr == ' ') ptexpr++; /* Sauter les blancs */
+    //-------------------------------------------------
+    // COMMENCER LE TRAITEMENT DE L'OPERATION POSTFIXEE
+    //-------------------------------------------------
+    
+    // SAUTER LES BLANCS DU DEBUT
+	while (*ptexpr == ' ') ptexpr++;
+    
+    
 	/* L'expression se termine sur = ou \n */
 	while ( *ptexpr != '=' && *ptexpr != '\n' ) {
 		if (!isdigit (*ptexpr)) {
